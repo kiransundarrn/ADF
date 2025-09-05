@@ -1,0 +1,212 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Employee Data Copy",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "data/source/Employee.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "data/destination/"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "source",
+							"wildcardFileName": "employee*.*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Education",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Education",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "JoiningYear",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "JoiningYear",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PaymentTier",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PaymentTier",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Age",
+									"type": "Int64",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Age",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Gender",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Gender",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EverBenched",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EverBenched",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExperienceInCurrentDomain",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExperienceInCurrentDomain",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LeaveOrNot",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LeaveOrNot",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Dynamic_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Dynamic_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "data",
+							"folder": "destination"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"folder": {
+				"type": "string"
+			},
+			"container": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-09-04T19:37:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

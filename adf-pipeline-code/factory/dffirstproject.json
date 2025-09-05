@@ -1,0 +1,9 @@
+{
+	"name": "dffirstproject",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "298e61f4-979f-41c3-bc70-7df3a1010e76",
+		"tenantId": "bdaf69d4-2953-42f7-a3e6-71f5b3994486"
+	}
+}

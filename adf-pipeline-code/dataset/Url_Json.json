@@ -1,0 +1,42 @@
+{
+	"name": "Url_Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Covid19"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "covid_lookup.json",
+				"fileSystem": "covidsource"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"base_url": {
+					"type": "string"
+				},
+				"relative_url": {
+					"type": "string"
+				},
+				"destination_container": {
+					"type": "string"
+				},
+				"destination_folder": {
+					"type": "string"
+				},
+				"destination_filename": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
